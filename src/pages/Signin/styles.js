@@ -5,7 +5,7 @@ import { StatusBar, Platform } from 'react-native';
 export const Background = styled.SafeAreaView`
 flex: 1;
 background-color: #F0F4FF ;
-margin-top: ${StatusBar.currentHeight || 0};
+margin-top: ${StatusBar.currentHeight || 0}px;
 `;
 
 export const Container = styled.KeyboardAvoidingView`
