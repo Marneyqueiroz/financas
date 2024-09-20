@@ -31,8 +31,31 @@ function AuthProvider({children}) {
         }
     }
 
+    async function signIn(email, password){
+        setLoadingAuth(true)
+        try {
+
+            const response = await api.post("/login", {
+                email,
+                password
+            })
+
+            const {id, name, token} = response.data;
+
+            const data = {id, name, token, email};
+
+            api.defaults.headers["Authorization"] = `Bearer ${token}`;
+
+            setUser({id, name, email});
+            
+        } catch (error) {
+            console.log("Erro ao cadastrar", error);
+            setLoadingAuth(false);
+        }
+    }
+
     return (
-        <AuthContext.Provider value={{user, signUp, loadingAuth}}>
+        <AuthContext.Provider value={{signed: !!user, user, signUp, signIn, loadingAuth}}>
 
             {children}
 
